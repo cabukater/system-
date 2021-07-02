@@ -18,7 +18,7 @@ export class ChartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const chart = createChart(document.body, { width: 400, height: 300 });
+    const chart = createChart(document.body, { width: 1400, height:800 });
     var lineSeries = chart.addLineSeries({ priceFormat: { minMove: 0.00000001 } });  
 
     this.service.getDataChart().subscribe( 
@@ -27,15 +27,9 @@ export class ChartComponent implements OnInit {
         this.dataCharts = chartData,
         console.log(this.dataCharts)
 
-        const changeFormat = this.dataCharts.map( (timestamp:  { timestamp: any; }) => {
-          return { time: new Date(timestamp.timestamp)
-        }})
-        
-        lineSeries.setData(this.dataCharts.map((cht: { timestamp: any; high: any; }) => {
+        lineSeries.setData(this.dataCharts.map((cht: { timestamp: any; bid: number; }) => {
 
-          const date = new Date(cht.timestamp*1000)
-            console.log(date)
-         return { time: this.datePipe.transform(date, 'yyyy-MM-dd')  , value: cht.high };
+         return { time: this.datePipe.transform(new Date(cht.timestamp*1000), 'yyyy-MM-dd')  , value: cht.bid };
 
         }));
       }
