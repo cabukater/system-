@@ -11,7 +11,7 @@ export class ChartService {
   ) { }
 
   getDataChart(){
-    return this.http.get('https://economia.awesomeapi.com.br/json/daily/USD-BRL/15')
+    return this.http.get('https://economia.awesomeapi.com.br/json/daily/USD-BRL/365')
       .pipe()
 
   }

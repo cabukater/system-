@@ -32,14 +32,11 @@ export class ChartComponent implements OnInit {
         }})
         
         lineSeries.setData(this.dataCharts.map((cht: { timestamp: any; high: any; }) => {
-          if (cht.timestamp === String){
-            console.log('é string')
 
-          } else {
-          console.log('não é string')
-          }
-         return { time: this.datePipe.transform(cht.timestamp, 'yyyy-MM-dd')  , value: cht.high };
-          console.log(this.datePipe.transform(cht.timestamp, 'yyyy-MM-dd') )
+          const date = new Date(cht.timestamp*1000)
+            console.log(date)
+         return { time: this.datePipe.transform(date, 'yyyy-MM-dd')  , value: cht.high };
+
         }));
       }
     )
